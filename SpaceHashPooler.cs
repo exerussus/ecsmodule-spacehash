@@ -86,11 +86,23 @@ namespace Exerussus.EasyEcsModules.SpaceHash
             return _result;
         }
 
+        public void GetAllInRadiusWithYLimit(Vector2 originPosition, float radius, float yLimit, List<SpaceHashHit<int>> result)
+        {
+            _spaceHash = TryRefresh();
+            _spaceHash.GetWithYLimit(originPosition.x, originPosition.y, radius, yLimit, false, result);
+        }
+
         public List<SpaceHashHit<int>> GetAllInRadius(Vector2 originPosition, float radius)
         {
             _spaceHash = TryRefresh();
             _spaceHash.Get(originPosition.x, originPosition.y, radius, false, _result);
             return _result;
+        }
+
+        public void GetAllInRadius(Vector2 originPosition, float radius, List<SpaceHashHit<int>> result)
+        {
+            _spaceHash = TryRefresh();
+            _spaceHash.Get(originPosition.x, originPosition.y, radius, false, result);
         }
         
         public List<SpaceHashHit<int>> GetAllInRadiusCustomFilter(Vector2 originPosition, float radius, EcsFilter ecsFilter)
@@ -104,6 +116,18 @@ namespace Exerussus.EasyEcsModules.SpaceHash
             
             _spaceHash.Get(originPosition.x, originPosition.y, radius, false, _resultCustom);
             return _resultCustom;
+        }
+        
+        public void GetAllInRadiusCustomFilter(Vector2 originPosition, float radius, EcsFilter ecsFilter, List<SpaceHashHit<int>> result)
+        {
+            _spaceHash.Clear();
+            foreach (var entity in ecsFilter)
+            {
+                ref var positionData = ref _movementPooler.Position.Get(entity);
+                _spaceHash.Add(entity, positionData.Value.x, positionData.Value.y);
+            }
+            
+            _spaceHash.Get(originPosition.x, originPosition.y, radius, false, result);
         }
     }
 }
