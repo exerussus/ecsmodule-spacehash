@@ -1,0 +1,26 @@
+{
+  "name": "com.exerussus.ecsmodule.spacehash",
+  "version": "1.0.0",
+  "displayName": "SpaceHash",
+  "description": "Модуль для 1EasyEcs",
+  "unity": "2020.3",
+  "dependencies": {},
+  "keywords": [
+    "leoecslite",
+    "leoecs",
+    "ecs",
+    "performance",
+    "spacehash",
+    "1easyecs",
+    "easyecsmodules",
+    "exerussus"
+  ],
+  "author": {
+    "name": "Exerussus",
+    "email": "solovyov.production@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exerussus/ecsmodule-spacehash.git"
+  }
+}

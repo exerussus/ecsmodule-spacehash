@@ -1,0 +1,19 @@
+{
+    "name": "1easyecs.module.exerussus.spacehash",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+        "GUID:3c9c26cee5b0d6c4199d1bacdbc44684",
+        "GUID:832d12579e9394f459c1915f58764e00",
+        "GUID:11f92b44b5772844c93c9dd717e4b16b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
