@@ -79,10 +79,10 @@ namespace Exerussus.EasyEcsModules.SpaceHash
             _lastFrame = 0;
         }
 
-        public List<SpaceHashHit<int>> GetAllInRadiusWithYLimit(Vector2 originPosition, float radius)
+        public List<SpaceHashHit<int>> GetAllInRadiusWithYLimit(Vector2 originPosition, float radius, float yLimit)
         {
             _spaceHash = TryRefresh();
-            _spaceHash.Get(originPosition.x, originPosition.y, radius, false, _result);
+            _spaceHash.GetWithYLimit(originPosition.x, originPosition.y, radius, yLimit, false, _result);
             return _result;
         }
 
