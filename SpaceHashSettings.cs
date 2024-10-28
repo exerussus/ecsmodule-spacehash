@@ -1,7 +1,7 @@
 ﻿using Leopotam.EcsLite;
 using UnityEngine;
 
-namespace Exerussus.EasyEcsModules.SpaceHash
+namespace ECS.Modules.Exerussus.SpaceHash
 {
     public class SpaceHashSettings
     {

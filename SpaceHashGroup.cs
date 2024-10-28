@@ -3,7 +3,7 @@ using Exerussus._1EasyEcs.Scripts.Custom;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-namespace Exerussus.EasyEcsModules.SpaceHash
+namespace ECS.Modules.Exerussus.SpaceHash
 {
     public class SpaceHashGroup : EcsGroup<SpaceHashPooler>
     {
@@ -13,12 +13,7 @@ namespace Exerussus.EasyEcsModules.SpaceHash
         {
             gameShare.AddSharedObject(_settings);
         }
-
-        protected override void SetInitSystems(IEcsSystems initSystems)
-        {
-            
-        }
-
+        
         public SpaceHashGroup SetCellSize(float value)
         {
             _settings.CellSize = value;

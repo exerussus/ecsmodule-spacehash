@@ -6,7 +6,7 @@ using Leopotam.EcsLite;
 using Leopotam.SpaceHash;
 using UnityEngine;
 
-namespace Exerussus.EasyEcsModules.SpaceHash
+namespace ECS.Modules.Exerussus.SpaceHash
 {
     public class SpaceHashPooler : IGroupPooler
     {
