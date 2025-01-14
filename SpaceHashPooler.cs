@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ECS.Modules.Exerussus.Movement;
 using Exerussus._1EasyEcs.Scripts.Core;
 using Exerussus._1EasyEcs.Scripts.Custom;
+using Exerussus.EasyEcsModules.BasicData;
 using Leopotam.EcsLite;
 using Leopotam.SpaceHash;
 using UnityEngine;
@@ -13,12 +13,12 @@ namespace ECS.Modules.Exerussus.SpaceHash
         public void Initialize(EcsWorld world)
         {
             World = world;
+            Position = new(world);
             InitSpaceHash();
             InitFilter();
         }
 
         [InjectSharedObject] private SpaceHashSettings _spaceHashSettings;
-        [InjectSharedObject] private MovementPooler _movementPooler;
         private List<SpaceHashHit<int>> _result = new(15);
         private List<SpaceHashHit<int>> _resultCustom = new(15);
         private SpaceHash2<int> _spaceHash;
@@ -26,6 +26,7 @@ namespace ECS.Modules.Exerussus.SpaceHash
 
         public EcsWorld World { get; private set; }
         public EcsFilter Filter { get; private set; }
+        public PoolerModule<MovementData.Position> Position {get; private set; }
 
         private void InitSpaceHash()
         {
@@ -58,7 +59,7 @@ namespace ECS.Modules.Exerussus.SpaceHash
             _spaceHash.Clear();
             foreach (var entity in Filter)
             {
-                ref var positionData = ref _movementPooler.Position.Get(entity);
+                ref var positionData = ref Position.Get(entity);
                 _spaceHash.Add(entity, positionData.Value.x, positionData.Value.y);
             }
         }
@@ -110,7 +111,7 @@ namespace ECS.Modules.Exerussus.SpaceHash
             _spaceHash.Clear();
             foreach (var entity in ecsFilter)
             {
-                ref var positionData = ref _movementPooler.Position.Get(entity);
+                ref var positionData = ref Position.Get(entity);
                 _spaceHash.Add(entity, positionData.Value.x, positionData.Value.y);
             }
             
@@ -123,7 +124,7 @@ namespace ECS.Modules.Exerussus.SpaceHash
             _spaceHash.Clear();
             foreach (var entity in ecsFilter)
             {
-                ref var positionData = ref _movementPooler.Position.Get(entity);
+                ref var positionData = ref Position.Get(entity);
                 _spaceHash.Add(entity, positionData.Value.x, positionData.Value.y);
             }
             
