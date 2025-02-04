@@ -19,14 +19,14 @@ namespace ECS.Modules.Exerussus.SpaceHash
         }
 
         [InjectSharedObject] private SpaceHashSettings _spaceHashSettings;
-        private List<SpaceHashHit<int>> _result = new(15);
-        private List<SpaceHashHit<int>> _resultCustom = new(15);
         private SpaceHash2<int> _spaceHash;
         private int _lastFrame;
 
         public EcsWorld World { get; private set; }
         public EcsFilter Filter { get; private set; }
         public PoolerModule<MovementData.Position> Position {get; private set; }
+
+        public SpaceHash2<int> SpaceHash => _spaceHash;
 
         private void InitSpaceHash()
         {
@@ -80,43 +80,16 @@ namespace ECS.Modules.Exerussus.SpaceHash
             _lastFrame = 0;
         }
 
-        public List<SpaceHashHit<int>> GetAllInRadiusWithYLimit(Vector2 originPosition, float radius, float yLimit)
-        {
-            _spaceHash = TryRefresh();
-            _spaceHash.GetWithYLimit(originPosition.x, originPosition.y, radius, yLimit, false, _result);
-            return _result;
-        }
-
         public void GetAllInRadiusWithYLimit(Vector2 originPosition, float radius, float yLimit, List<SpaceHashHit<int>> result)
         {
             _spaceHash = TryRefresh();
             _spaceHash.GetWithYLimit(originPosition.x, originPosition.y, radius, yLimit, false, result);
         }
 
-        public List<SpaceHashHit<int>> GetAllInRadius(Vector2 originPosition, float radius)
-        {
-            _spaceHash = TryRefresh();
-            _spaceHash.Get(originPosition.x, originPosition.y, radius, false, _result);
-            return _result;
-        }
-
         public void GetAllInRadius(Vector2 originPosition, float radius, List<SpaceHashHit<int>> result)
         {
             _spaceHash = TryRefresh();
             _spaceHash.Get(originPosition.x, originPosition.y, radius, false, result);
-        }
-        
-        public List<SpaceHashHit<int>> GetAllInRadiusCustomFilter(Vector2 originPosition, float radius, EcsFilter ecsFilter)
-        {
-            _spaceHash.Clear();
-            foreach (var entity in ecsFilter)
-            {
-                ref var positionData = ref Position.Get(entity);
-                _spaceHash.Add(entity, positionData.Value.x, positionData.Value.y);
-            }
-            
-            _spaceHash.Get(originPosition.x, originPosition.y, radius, false, _resultCustom);
-            return _resultCustom;
         }
         
         public void GetAllInRadiusCustomFilter(Vector2 originPosition, float radius, EcsFilter ecsFilter, List<SpaceHashHit<int>> result)
